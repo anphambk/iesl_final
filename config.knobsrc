@@ -1,0 +1,17 @@
+// 
++verbosity=SC_LOW
+
+// Data addresses
++top.image_file=image.txt
++top.filter_file=filter.txt
++top*.image_address=0x00000000
++top*.filter_address=0x00001000
++top*.psum_address=0x000002000
+
+// CNN instruction
++top.cpu.image_width=5
++top.cpu.image_height=5
++top.cpu.image_depth=1
++top.cpu.filter_size=3
++top.cpu.filter_stride=1
++top.cpu.filter_number=1
