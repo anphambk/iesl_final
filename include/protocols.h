@@ -49,7 +49,7 @@ struct instruction_payload
     unsigned int filter_stride;
     unsigned int filter_number;
     unsigned int psum_address;
-    unsigned char psum_reuse;
+    unsigned char psum_accumulate;
     
     //these methods are just dummy implementation in order to compile
     bool has_mm() {return false;}

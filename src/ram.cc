@@ -53,7 +53,7 @@ void ram::operate (tlm_generic_payload& trans, sc_time& delay)
     sc_dt::uint64    address = trans.get_address();     // memory address
     tlm::tlm_command command = trans.get_command();     // memory command
     unsigned char    *data   = trans.get_data_ptr();    // data pointer
-    unsigned  int     length = trans.get_data_length(); // data length
+    unsigned int     length = trans.get_data_length(); // data length
 
     tlm_response_status response_status = check_address(trans)
         ? TLM_OK_RESPONSE
@@ -158,7 +158,7 @@ void ram::dump (unsigned int address, unsigned int length)
     unsigned char* cdata;
     
     cdata = (unsigned char*)(&data);
-    sprintf(msg, "Dumping RAM data from address=0x%X to address=0x%d", address, address + 4 * length - 1);
+    sprintf(msg, "Dumping RAM data from address=0x%X to address=0x%X", address, address + 4 * length - 1);
     SC_REPORT_INFO_VERB(name(), msg, SC_NONE);
     for (int i = 0; i < length; i++)
     {

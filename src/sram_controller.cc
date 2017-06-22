@@ -140,8 +140,12 @@ void sram_controller::psum_operation ()
         {
             // read phase
             delay = SC_ZERO_TIME;
-            if (m_ins.s.psum_reuse)
+            if (m_ins.s.psum_accumulate == 1)
             {
+                gp.set_address(address + i * gp.get_data_length());
+                gp.set_command(TLM_READ_COMMAND);
+                gp.set_response_status(TLM_INCOMPLETE_RESPONSE);
+                psram_socket->b_transport(gp, delay);
             }
             else
             {

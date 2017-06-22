@@ -39,7 +39,7 @@ void dram_controller::b_transport (tlm_generic_payload& trans, sc_time& delay)
         gp.set_response_status(TLM_INCOMPLETE_RESPONSE);
         sram_socket->b_transport(gp, int_delay);
         wait(int_delay);
-        SC_REPORT_INFO(name(), format("Sent DRAM->SRAM %s", gp_to_string(gp)));
+        SC_REPORT_INFO(name(), format("Sent DRAM[0x%X]->SRAM %s", m_ins.s.address0, gp_to_string(gp)));
     }
     else
     {
@@ -57,7 +57,7 @@ void dram_controller::b_transport (tlm_generic_payload& trans, sc_time& delay)
         gp.set_response_status(TLM_INCOMPLETE_RESPONSE);
         dram_socket->b_transport(gp, int_delay);
         wait(int_delay);
-        SC_REPORT_INFO(name(), format("Sent SRAM->DRAM %s", gp_to_string(gp)));
+        SC_REPORT_INFO(name(), format("Sent SRAM[0x%X]->DRAM %s", m_ins.s.address1, gp_to_string(gp)));
     }
     delay += SYS_CLK;
 }

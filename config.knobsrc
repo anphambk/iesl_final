@@ -1,6 +1,7 @@
 //@
 +log_file=sc.log
 +verbosity=SC_LOW
+//+verbosity=SC_MEDIUM
 
 //@ Hardware parameters
 +top.ramsize=0x400000 // 4MB
