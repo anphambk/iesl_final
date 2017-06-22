@@ -1,5 +1,6 @@
 //@ Debug
 +log_file=sc.log
++show_log=0
 +verbosity=SC_LOW
 //+verbosity=SC_MEDIUM
 
@@ -18,7 +19,7 @@
 //@ CNN instruction
 +top.cpu.image_width=13
 +top.cpu.image_height=13
-+top.cpu.image_depth=12
++top.cpu.image_depth=192
 +top.cpu.filter_size=3
 +top.cpu.filter_stride=1
-+top.cpu.filter_number=12
++top.cpu.filter_number=10
