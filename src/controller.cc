@@ -27,13 +27,22 @@ void controller::cpu_transport(tlm_generic_payload& trans, sc_time& delay)
     ins_gp.set_data_ptr(ins.dptr);
    
     // Buffer input feature map
+    //dma.s.direction = 0;
+    //dma.s.length = image_buffer;
+    //dma.s.address0 = m_ins.s.image_address;
+    //dma.s.address1 = 0;
+    //dma_gp.set_response_status(TLM_INCOMPLETE_RESPONSE);
+    //delay += SYS_CLK;
+    //dram_socket->b_transport(dma_gp, delay);
     dma.s.direction = 0;
-    dma.s.length = image_buffer;
-    dma.s.address0 = m_ins.s.image_address;
-    dma.s.address1 = 0;
-    dma_gp.set_response_status(TLM_INCOMPLETE_RESPONSE);
-    delay += SYS_CLK;
-    dram_socket->b_transport(dma_gp, delay);
+    dma.s.length = m_ins.s.image_width * m_ins.s.image_height * sizeof(float);
+    for(int c = 0; c < image_depth; c++) {
+        dma.s.address0 = m_ins.s.image_address + c * dma.s.length;
+        dma.s.address1 = c * dma.s.length;
+        dma_gp.set_response_status(TLM_INCOMPLETE_RESPONSE);
+        delay += SYS_CLK;
+        dram_socket->b_transport(dma_gp, delay);
+    }
 
     // Calculate
     for(int m = 0; m < filter_number; m++){
@@ -57,17 +66,17 @@ void controller::cpu_transport(tlm_generic_payload& trans, sc_time& delay)
             delay += SYS_CLK;
             sram_socket->b_transport(ins_gp, delay);
             //
-            dma.s.direction = 1;
-            unsigned int width = m_ins.s.image_width - m_ins.s.filter_size + (m_ins.s.filter_size % 2);
-            unsigned int height = m_ins.s.image_height - m_ins.s.filter_size + (m_ins.s.filter_size % 2);
-            dma.s.length = width * height * sizeof(float);
-            dma.s.address0 = m_ins.s.psum_address + m * dma.s.length;
-            dma.s.address1 = ins.s.psum_address;
-            dma_gp.set_response_status(TLM_INCOMPLETE_RESPONSE);
-            delay += SYS_CLK;
-            dram_socket->b_transport(dma_gp, delay);
-            //
             wait(delay);
         }
+        // Write back result for each Synapse
+        dma.s.direction = 1;
+        unsigned int width = m_ins.s.image_width - m_ins.s.filter_size + (m_ins.s.filter_size % 2);
+        unsigned int height = m_ins.s.image_height - m_ins.s.filter_size + (m_ins.s.filter_size % 2);
+        dma.s.length = width * height * sizeof(float);
+        dma.s.address0 = m_ins.s.psum_address + m * dma.s.length;
+        dma.s.address1 = ins.s.psum_address;
+        dma_gp.set_response_status(TLM_INCOMPLETE_RESPONSE);
+        delay += SYS_CLK;
+        dram_socket->b_transport(dma_gp, delay);
     }
 }

@@ -166,7 +166,7 @@ void ram::dump (unsigned int address, unsigned int length)
         *(cdata + 1) = m_memory[address + 4 * i + 1];
         *(cdata + 2) = m_memory[address + 4 * i + 2];
         *(cdata + 3) = m_memory[address + 4 * i + 3];
-        sprintf(msg, "address=%d, data=%f", address + 4 * i, data);
+        sprintf(msg, "address=0x%X, data=%f", address + 4 * i, data);
         SC_REPORT_INFO_VERB(name(), msg, SC_NONE);
     }
 }

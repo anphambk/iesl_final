@@ -20,12 +20,12 @@ top::top(const sc_module_name& nm)
     //
     address = sknobs_get_value(format("%s.image_address", name()), 0);
     dram.initialize(address, sknobs_get_string(format("%s.image_file", name()), "image.txt"));
-    length = image_width*image_height*image_depth;
-    dram.dump(address, length);
+    //length = image_width*image_height*image_depth;
+    //dram.dump(address, length);
     address = sknobs_get_value(format("%s.filter_address", name()), 0);
     dram.initialize(address, sknobs_get_string(format("%s.filter_file", name()), "filter.txt"));
-    length = filter_size*filter_size*image_depth*filter_number;
-    dram.dump(address, length);
+    //length = filter_size*filter_size*image_depth*filter_number;
+    //dram.dump(address, length);
 }
 
 void top::end_of_simulation ()

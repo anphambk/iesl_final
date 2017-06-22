@@ -1,10 +1,10 @@
-//@
+//@ Debug
 +log_file=sc.log
 +verbosity=SC_LOW
 //+verbosity=SC_MEDIUM
 
 //@ Hardware parameters
-+top.ramsize=0x400000 // 4MB
++top.ramsize=0x800000 // 8MB
 
 //@ Data addresses
 //+top.image_file=image.txt
@@ -12,13 +12,13 @@
 //+top.filter_file=filter.txt
 +top.filter_file=data/alexnet/conv4_384x192x3x3.csv
 +top*.image_address=0x00000000
-+top*.filter_address=0x00010000
-+top*.psum_address=0x000020000
++top*.filter_address=0x00200000 // 2MB
++top*.psum_address=0x000600000  // 6MB
 
 //@ CNN instruction
 +top.cpu.image_width=13
 +top.cpu.image_height=13
-+top.cpu.image_depth=2
++top.cpu.image_depth=12
 +top.cpu.filter_size=3
 +top.cpu.filter_stride=1
-+top.cpu.filter_number=2
++top.cpu.filter_number=12

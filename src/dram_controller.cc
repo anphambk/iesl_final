@@ -50,6 +50,12 @@ void dram_controller::b_transport (tlm_generic_payload& trans, sc_time& delay)
         gp.set_response_status(TLM_INCOMPLETE_RESPONSE);
         sram_socket->b_transport(gp, int_delay);
         wait(int_delay);
+        // ReLU
+        float* data = (float*)gp.get_data_ptr();
+        int dlength = gp.get_data_length()/4;
+        for(int i = 0; i < dlength; i++) {
+            if(*(data+i) < 0) *(data+i) = 0; 
+        }
         // write phase
         int_delay = SC_ZERO_TIME;
         gp.set_command(TLM_WRITE_COMMAND);
