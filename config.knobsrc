@@ -1,17 +1,23 @@
-// 
+//@
++log_file=sc.log
 +verbosity=SC_LOW
 
-// Data addresses
-+top.image_file=image.txt
-+top.filter_file=filter.txt
-+top*.image_address=0x00000000
-+top*.filter_address=0x00001000
-+top*.psum_address=0x000002000
+//@ Hardware parameters
++top.ramsize=0x400000 // 4MB
 
-// CNN instruction
-+top.cpu.image_width=5
-+top.cpu.image_height=5
-+top.cpu.image_depth=1
+//@ Data addresses
+//+top.image_file=image.txt
++top.image_file=data/alexnet/img0_conv3_384x13x13.csv
+//+top.filter_file=filter.txt
++top.filter_file=data/alexnet/conv4_384x192x3x3.csv
++top*.image_address=0x00000000
++top*.filter_address=0x00010000
++top*.psum_address=0x000020000
+
+//@ CNN instruction
++top.cpu.image_width=13
++top.cpu.image_height=13
++top.cpu.image_depth=2
 +top.cpu.filter_size=3
 +top.cpu.filter_stride=1
-+top.cpu.filter_number=1
++top.cpu.filter_number=2

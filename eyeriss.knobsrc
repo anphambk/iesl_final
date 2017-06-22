@@ -1,8 +1,9 @@
-// Eyeriss size
-+eyeriss.hsize=3
-+eyeriss.vsize=3
+//@ Eyeriss size
++eyeriss.hsize=13
++eyeriss.vsize=13
++top.eyeriss.ramsize=0x1B000 // 8kB
 
-// Image tags
+//@ Image tags
 +top.eyeriss.pe_array.rows_0.itags_0.tag=0
 +top.eyeriss.pe_array.rows_0.itags_1.tag=1
 +top.eyeriss.pe_array.rows_0.itags_2.tag=2
@@ -13,7 +14,7 @@
 +top.eyeriss.pe_array.rows_2.itags_1.tag=3
 +top.eyeriss.pe_array.rows_2.itags_2.tag=4
 
-// Filter tags
+//@ Filter tags
 +top.eyeriss.pe_array.rows_0.ftags_0.tag=0
 +top.eyeriss.pe_array.rows_0.ftags_1.tag=0
 +top.eyeriss.pe_array.rows_0.ftags_2.tag=0
@@ -24,7 +25,7 @@
 +top.eyeriss.pe_array.rows_2.ftags_1.tag=2
 +top.eyeriss.pe_array.rows_2.ftags_2.tag=2
 
-// Enable PEs
+//@ Enable PEs
 +top.eyeriss.pe_array.rows_0.elements_0.active=1
 +top.eyeriss.pe_array.rows_0.elements_1.active=1
 +top.eyeriss.pe_array.rows_0.elements_2.active=1
@@ -35,7 +36,7 @@
 +top.eyeriss.pe_array.rows_2.elements_1.active=1
 +top.eyeriss.pe_array.rows_2.elements_2.active=1
 
-// RAM power estimation
+//@ RAM power estimation
 +top.dram.power=200
 +top.eyeriss.main_buffer.power=6
 

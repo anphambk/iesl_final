@@ -4,6 +4,8 @@
 int sc_main(int argc, char **argv)
 {
     char *verb;
+    char *log_file;
+
     map<string,sc_verbosity> parser;
     parser["SC_NONE"]=SC_NONE;
     parser["SC_LOW"]=SC_LOW;
@@ -12,7 +14,8 @@ int sc_main(int argc, char **argv)
     parser["SC_FULL"]=SC_FULL;
     parser["SC_DEBUG"]=SC_DEBUG;
 
-    sc_report_handler::set_log_file_name("sc.log");
+    log_file  = sknobs_get_string("log_file", "sc.log");
+    sc_report_handler::set_log_file_name(log_file);
     verb = sknobs_get_string("verbosity", "SC_LOW");
     string s = string(verb);
     sc_report_handler::set_verbosity_level(parser[s]);

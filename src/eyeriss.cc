@@ -9,7 +9,7 @@ eyeriss::eyeriss (const sc_module_name& nm, unsigned int hsize, unsigned int vsi
     , dram_socket("dram_socket")
     , controller_0("controller")
     , dram_controller_0("dram_controller")
-    , main_buffer("main_buffer", 32, 0x1B000)
+    , main_buffer("main_buffer", 32, m_ramsize)
     , sram_controller_0("sram_controller")
     , pe_array_0("pe_array", hsize, vsize)
 {

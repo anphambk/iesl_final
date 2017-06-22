@@ -12,6 +12,7 @@ ram::ram (const sc_module_name& nm, unsigned int bus_width, unsigned int memory_
     m_word_size = bus_width / 8;
     port.register_b_transport(this, &ram::b_transport);
 
+    SC_REPORT_INFO_VERB(name(), format("Size=0x%X", memory_size), SC_LOW);
     if (memory_size) {
         m_memory = new unsigned char[memory_size];
     } else {
@@ -147,8 +148,6 @@ void ram::initialize (unsigned int address, char* file)
         size++;
     }
     fh.close();
-    //
-    dump(address, size);
 }
 
 //@
@@ -159,7 +158,7 @@ void ram::dump (unsigned int address, unsigned int length)
     unsigned char* cdata;
     
     cdata = (unsigned char*)(&data);
-    sprintf(msg, "Dumping RAM data from address=%d to address=%0d", address, address + 4 * length - 1);
+    sprintf(msg, "Dumping RAM data from address=0x%X to address=0x%d", address, address + 4 * length - 1);
     SC_REPORT_INFO_VERB(name(), msg, SC_NONE);
     for (int i = 0; i < length; i++)
     {

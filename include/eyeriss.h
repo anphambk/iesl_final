@@ -17,6 +17,7 @@ public:
 protected:
     unsigned int m_hsize;
     unsigned int m_vsize;
+    unsigned int m_ramsize = sknobs_get_value(format("%s.ramsize", name()), 0x1B000);
     controller       controller_0     ;
     dram_controller  dram_controller_0;
     ram              main_buffer      ;
